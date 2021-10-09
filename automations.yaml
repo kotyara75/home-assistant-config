@@ -1,0 +1,104 @@
+- id: '1622271173966'
+  alias: Heat house before waking up
+  description: ''
+  trigger:
+  - platform: time
+    at: input_datetime.heating_on_time
+  condition:
+  - condition: state
+    entity_id: binary_sensor.workday_sensor
+    state: 'on'
+  action:
+  - device_id: 1a893a4be3cfc8cded4362c1da1eef72
+    domain: climate
+    entity_id: climate.house_heating_thermostat
+    type: set_hvac_mode
+    hvac_mode: heat
+  mode: single
+- id: '1622385808576'
+  alias: Test Zone notifications
+  description: ''
+  use_blueprint:
+    path: homeassistant/notify_leaving_zone.yaml
+    input:
+      person_entity: person.kisa
+      zone_entity: zone.home
+      notify_device: 67cb18fa695e580b17f8937266a83e73
+- id: '1622386065741'
+  alias: Lights off upon sunrise
+  description: ''
+  trigger:
+  - platform: sun
+    event: sunrise
+    offset: 00:30
+  condition: []
+  action:
+  - service: light.turn_off
+    target:
+      entity_id: light.whole_house_lights
+  mode: single
+- id: '1622461789669'
+  alias: Dim lights after 9:30
+  description: ''
+  trigger:
+  - platform: time
+    at: '21:30'
+  condition: []
+  action:
+  - service: light.turn_on
+    target:
+      entity_id: light.lamp
+    data:
+      brightness: 34
+  - service: light.turn_on
+    data_template:
+      entity_id: '{{ expand(state_attr(''light.whole_house_lights'', ''entity_id''))|selectattr(''state'',
+        ''eq'', ''on'')|selectattr(''attributes.brightness'', ''gt'', 33)|map(attribute=''entity_id'')|join('',
+        '')}}'
+      brightness: 33
+  mode: single
+- id: cb2047d7dedb45a68d4dda8f28d92340
+  alias: Dim lights more after 00:00
+  description: ''
+  trigger:
+  - platform: time
+    at: 00:00
+  condition: []
+  action:
+  - service: light.turn_on
+    data_template:
+      entity_id: '{{ expand(state_attr(''light.whole_house_lights'', ''entity_id''))|selectattr(''state'',
+        ''eq'', ''on'')|selectattr(''attributes.brightness'', ''gt'', 1)|map(attribute=''entity_id'')|join('',
+        '')}}'
+      brightness: 1
+  mode: single
+- id: '1623924293577'
+  alias: Notify Kisa about humidifier
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: sensor.incubator_humidifier_state
+    to: Error
+  condition: []
+  action:
+  - service: notify.mobile_app_yulias_iphone
+    data:
+      message: Incubator Humidifier needs attention
+      title: Яйцы сохнут!
+      data:
+        push:
+          thread-id: humidifier-notification-group
+  mode: single
+- id: '1627019410648'
+  alias: Karate
+  description: ''
+  trigger:
+  - platform: time
+    at: '16:50'
+  condition: []
+  action:
+  - service: tts.google_translate_say
+    data:
+      entity_id: media_player.googlehome4841
+      message: Karate Karate Karate Karate Karate
+  mode: single

@@ -1,0 +1,32 @@
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+# Text to speech
+tts:
+  - platform: google_translate
+
+# Australia Holidays sensor 
+binary_sensor:
+  - platform: workday
+    country: AU
+    province: VIC
+    
+zone:
+# This will override the default home zone
+  - name: Home
+    latitude: !secret home_latitude
+    longitude: !secret home_longitude
+    radius: 100
+    icon: mdi:home
+
+group: !include groups.yaml
+light groups: !include light-groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
+modbus: !include modbus.yaml
+    
+#influxdb: !include influxdb.yaml
+
+#sensor: !include sensors.yaml

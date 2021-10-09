@@ -1,0 +1,69 @@
+- name: "MPPT20D"
+  close_comm_on_error: true
+  # delay: 5
+  # timeout: 5
+  type: tcp
+  host: 192.168.0.8
+  port: 8088
+  sensors:
+  - name: MPPT20D Battery SOC
+    address: 10
+    input_type: holding
+    scan_interval: 60
+    slave: 1
+    unit_of_measurement: "%"
+  - name: MPPT20D Total Energy Generated
+    address: 16
+    input_type: holding
+    scan_interval: 60
+    slave: 1
+    unit_of_measurement: kAh
+    # data_type: int16
+    scale: 0.1
+    precision: 1
+  - name: MPPT20D Temperature
+    address: 6
+    input_type: holding
+    scan_interval: 60
+    slave: 1
+    unit_of_measurement: °C
+  - name: MPPT20D Solar Input
+    address: 1
+    input_type: holding
+    scan_interval: 60
+    slave: 1
+    unit_of_measurement: V
+    scale: 0.01
+    precision: 2
+  - name: MPPT20D Battery Voltage Level
+    address: 5
+    input_type: holding
+    scan_interval: 60
+    slave: 1
+    unit_of_measurement: V
+    # data_type: int16
+    scale: 0.01
+    precision: 2
+  - name: MPPT20D Solar Current
+    address: 2
+    input_type: holding
+    scan_interval: 60
+    slave: 1
+    unit_of_measurement: A
+    # data_type: int16
+    scale: 0.01
+    precision: 2
+  - name: MPPT20D Battery Current
+    address: 7
+    input_type: holding
+    scan_interval: 60
+    slave: 1
+    unit_of_measurement: A
+    # data_type: int16
+    scale: 0.01
+    precision: 2
+  - name: MPPT20D Solar Mode
+    address: 11
+    input_type: holding
+    scan_interval: 60
+    slave: 1

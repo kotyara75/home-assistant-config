@@ -1,0 +1,7 @@
+- platform: group
+  name: Whole House Lights
+  entities:
+    - light.bedroom_lamp
+    - light.lamp
+    - light.lr_lamp
+    - light.yulia
