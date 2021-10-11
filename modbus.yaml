@@ -6,64 +6,221 @@
   host: 192.168.0.8
   port: 8088
   sensors:
-  - name: MPPT20D Battery SOC
-    address: 10
-    input_type: holding
-    scan_interval: 60
-    slave: 1
-    unit_of_measurement: "%"
-  - name: MPPT20D Total Energy Generated
-    address: 16
-    input_type: holding
-    scan_interval: 60
-    slave: 1
-    unit_of_measurement: kAh
-    # data_type: int16
-    scale: 0.1
-    precision: 1
-  - name: MPPT20D Temperature
-    address: 6
-    input_type: holding
-    scan_interval: 60
-    slave: 1
-    unit_of_measurement: °C
   - name: MPPT20D Solar Input
     address: 1
+    slave: 1
+    data_type: uint16
     input_type: holding
     scan_interval: 60
-    slave: 1
     unit_of_measurement: V
-    scale: 0.01
-    precision: 2
-  - name: MPPT20D Battery Voltage Level
-    address: 5
-    input_type: holding
-    scan_interval: 60
-    slave: 1
-    unit_of_measurement: V
-    # data_type: int16
     scale: 0.01
     precision: 2
   - name: MPPT20D Solar Current
     address: 2
+    slave: 1
+    data_type: uint16
     input_type: holding
     scan_interval: 60
-    slave: 1
     unit_of_measurement: A
-    # data_type: int16
     scale: 0.01
     precision: 2
+  - name: MPPT20D Solar Output Power
+    address: 3
+    slave: 1
+    data_type: uint16
+    input_type: holding
+    scan_interval: 60
+    unit_of_measurement: W
+    scale: 0.1
+    precision: 1
+  - name: MPPT20D Solar Status RAW
+    address: 4
+    slave: 1
+    data_type: custom
+    count: 1
+    input_type: holding
+    scan_interval: 60
+    structure: ">xB"
+  - name: MPPT20D Battery Voltage
+    address: 5
+    slave: 1
+    data_type: uint16
+    input_type: holding
+    scan_interval: 60
+    unit_of_measurement: V
+    scale: 0.01
+    precision: 2
+  - name: MPPT20D Battery Temperature
+    address: 6
+    slave: 1
+    data_type: int16
+    input_type: holding
+    scan_interval: 60
+    unit_of_measurement: °C
   - name: MPPT20D Battery Current
     address: 7
+    slave: 1
+    data_type: uint16
     input_type: holding
     scan_interval: 60
-    slave: 1
     unit_of_measurement: A
-    # data_type: int16
     scale: 0.01
     precision: 2
-  - name: MPPT20D Solar Mode
-    address: 11
+  - name: MPPT20D Load Current
+    address: 8 
+    slave: 1
+    data_type: uint16
     input_type: holding
     scan_interval: 60
+    unit_of_measurement: A
+    scale: 0.01
+    precision: 2
+  - name: MPPT20D Battery SOC
+    address: 10
     slave: 1
+    data_type: int16
+    input_type: holding
+    scan_interval: 60
+    unit_of_measurement: "%"
+  - name: MPPT20D Charging Mode RAW
+    address: 11
+    slave: 1
+    input_type: holding
+    scan_interval: 60
+    data_type: custom
+    count: 1
+    structure: ">xB"
+  - name: MPPT20D Controller Temperature
+    address: 12
+    slave: 1
+    data_type: int16
+    input_type: holding
+    scan_interval: 60
+    unit_of_measurement: °C
+# per day, month, year stats are skipped
+  - name: MPPT20D Total Current Generated
+    address: 16
+    slave: 1
+    data_type: uint16
+    input_type: holding
+    scan_interval: 60
+    unit_of_measurement: kAh
+    scale: 0.01
+    precision: 2
+
+  - name: MPPT20D Total Current Spend
+    address: 20
+    slave: 1
+    data_type: uint16
+    input_type: holding
+    scan_interval: 60
+    unit_of_measurement: kAh
+    scale: 0.01
+    precision: 2
+
+  - name: MPPT20D Total Power Generated
+    address: 24
+    slave: 1
+    data_type: uint16
+    input_type: holding
+    scan_interval: 60
+    unit_of_measurement: MWh
+    scale: 0.01
+    precision: 2
+
+  - name: MPPT20D Total Power Spend
+    address: 28
+    slave: 1
+    data_type: uint16
+    input_type: holding
+    scan_interval: 60
+    unit_of_measurement: MWh
+    scale: 0.01
+    precision: 2
+
+  - name: MPPT20D Absorption Voltage
+    address: 30
+    slave: 1
+    data_type: uint16
+    input_type: holding
+    scan_interval: 60
+    unit_of_measurement: V
+    scale: 0.01
+    precision: 2
+  - name: MPPT20D Equalisation Voltage
+    address: 31
+    slave: 1
+    data_type: uint16
+    input_type: holding
+    scan_interval: 60
+    unit_of_measurement: V
+    scale: 0.01
+    precision: 2
+  - name: MPPT20D Temperature compensation
+    address: 34
+    slave: 1
+    data_type: int16
+    input_type: holding
+    scan_interval: 60
+    unit_of_measurement: mV/cell/°C
+
+  - name: MPPT20D Load Mode RAW
+    address: 39
+    slave: 1
+    data_type: custom
+    count: 1
+    input_type: holding
+    scan_interval: 60
+    structure: ">xB"
+
+  - name: MPPT20D Battery type RAW
+    address: 50
+    slave: 1
+    data_type: custom
+    count: 1
+    input_type: holding
+    scan_interval: 60
+    structure: ">xB"
+
+  - name: MPPT20D Controller status bit mask RAW
+    address: 54
+    slave: 1
+    data_type: uint16
+    input_type: holding
+    scan_interval: 60
+
+  - name: MPPT20D Load Power
+    address: 63
+    slave: 1
+    data_type: uint16
+    input_type: holding
+    scan_interval: 60
+    unit_of_measurement: kWh
+    scale: 0.01
+    precision: 2
+
+  - name: MPPT20D Li Battery Charge Rate
+    address: 114
+    slave: 1
+    data_type: uint16
+    input_type: holding
+    scan_interval: 60
+    unit_of_measurement: C
+    scale: 0.01
+    precision: 2
+  - name: MPPT20D Li Battery Capacity
+    address: 115
+    slave: 1
+    data_type: uint16
+    input_type: holding
+    scan_interval: 60
+    unit_of_measurement: Ah
+  - name: MPPT20D Li CV Mode Voltage
+    address: 116
+    slave: 1
+    data_type: uint16
+    input_type: holding
+    scan_interval: 60
+    unit_of_measurement: V
+    scale: 0.01
+    precision: 2
