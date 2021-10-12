@@ -1,28 +1,28 @@
-- platform: filter
-  name: "Filtered Incubator Humidity"
-  entity_id: sensor.incubator_humidity
-  filters:
-    - filter: outlier
-      window_size: 4
-      radius: 4.0
-    - filter: lowpass
-      time_constant: 10
-      precision: 1
-- platform: filter
-  name: "Filtered Incubator Humidity (SMA)"
-  entity_id: sensor.incubator_humidity
-  filters:
-    - filter: time_simple_moving_average
-      window_size: 00:05
-- platform: filter
-  name: "Filtered Incubator Temperature"
-  entity_id: sensor.incubator_temperature
-  filters:
-    - filter: outlier
-      window_size: 4
-      radius: 2.0
-    - filter: lowpass
-      time_constant: 10
-    - filter: time_simple_moving_average
-      window_size: "00:05"
-      precision: 1
+# - platform: filter
+#   name: "Filtered Incubator Humidity"
+#   entity_id: sensor.incubator_humidity
+#   filters:
+#     - filter: outlier
+#       window_size: 4
+#       radius: 4.0
+#     - filter: lowpass
+#       time_constant: 10
+#       precision: 1
+# - platform: filter
+#   name: "Filtered Incubator Humidity (SMA)"
+#   entity_id: sensor.incubator_humidity
+#   filters:
+#     - filter: time_simple_moving_average
+#       window_size: 00:05
+# - platform: filter
+#   name: "Filtered Incubator Temperature"
+#   entity_id: sensor.incubator_temperature
+#   filters:
+#     - filter: outlier
+#       window_size: 4
+#       radius: 2.0
+#     - filter: lowpass
+#       time_constant: 10
+#     - filter: time_simple_moving_average
+#       window_size: "00:05"
+#       precision: 1

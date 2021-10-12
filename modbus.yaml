@@ -46,7 +46,7 @@
     slave: 1
     data_type: uint16
     input_type: holding
-    scan_interval: 60
+    scan_interval: 5
     unit_of_measurement: V
     scale: 0.01
     precision: 2

@@ -1,0 +1,34 @@
+- sensor:
+  - name: "MPPT20D Battery Type"
+    #unit_of_measurement: "°C"
+    icon: mdi:car-battery
+    state: >
+      {% set map = ["Custom","Gel","Sealed","Flooded","Lithium"] %}
+      {% set i = states('sensor.mppt20d_battery_type_raw')|int %}
+      {{ map[i]|default(i) }}
+      
+  - name: "MPPT20D Charging Mode"
+    #unit_of_measurement: "°C"
+    icon: mdi:battery-charging-medium
+    state: >
+      {% set map = ["Off","Strong","MPPT","Float","Absorption","Balanced","CC","CV"] %}
+      {% set i = states('sensor.mppt20d_charging_mode_raw')|int %}
+      {{ map[i]|default(i) }}
+      
+  - name: "MPPT20D Load Mode"
+    #unit_of_measurement: "°C"
+    icon: mdi:lightbulb-outline
+    state: >
+      {% set map = ["Standard","Dual time Light control","Light control","Timer"] %}
+      {% set i = states('sensor.mppt20d_load_mode_raw')|int %}
+      {{ map[i]|default(i) }}
+      
+  - name: "MPPT20D Solar Status"
+    #unit_of_measurement: "°C"
+    icon: mdi:solar-panel
+    state: >
+      {% set map = ["Low voltage","Power generation","High voltage","NC"] %}
+      {% set i = states('sensor.mppt20d_solar_status_raw')|int %}
+      {{ map[i]|default(i) }}
+     
+#     MPPT20D Controller status bit mask RAW
