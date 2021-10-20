@@ -26,3 +26,38 @@
 #     - filter: time_simple_moving_average
 #       window_size: "00:05"
 #       precision: 1
+- platform: filter
+  name: MPPT20D Battery Current SMA
+  entity_id: sensor.mppt20d_battery_current
+  filters:
+    - filter: time_simple_moving_average
+      window_size: 00:05
+- platform: filter
+  name: MPPT20D Load Current SMA
+  entity_id: sensor.mppt20d_load_current
+  filters:
+    - filter: time_simple_moving_average
+      window_size: 00:05
+
+- platform: integration
+  name: MPPT20D Battery Current Integrated
+  source: sensor.mppt20d_battery_current
+  unit_time: h
+#  unit_prefix: k
+  round: 1
+# In case you have an appliance which produces spikey consumption 
+# (like an on/off electrical boiler) you should opt for the left 
+# method to get accurate readings
+  method: left 
+  
+- platform: integration
+  name: MPPT20D Load Current Integrated
+  source: sensor.mppt20d_load_current
+#  unit_prefix: k
+  unit_time: h
+  round: 1
+# In case you have an appliance which produces spikey consumption 
+# (like an on/off electrical boiler) you should opt for the left 
+# method to get accurate readings
+  method: left
+  

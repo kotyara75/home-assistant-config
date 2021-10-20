@@ -12,6 +12,7 @@
     data_type: uint16
     input_type: holding
     scan_interval: 60
+    device_class: voltage
     unit_of_measurement: V
     scale: 0.01
     precision: 2
@@ -21,6 +22,7 @@
     data_type: uint16
     input_type: holding
     scan_interval: 60
+    device_class: current
     unit_of_measurement: A
     scale: 0.01
     precision: 2
@@ -30,6 +32,7 @@
     data_type: uint16
     input_type: holding
     scan_interval: 60
+    device_class: power
     unit_of_measurement: W
     scale: 0.1
     precision: 1
@@ -47,6 +50,7 @@
     data_type: uint16
     input_type: holding
     scan_interval: 5
+    device_class: voltage
     unit_of_measurement: V
     scale: 0.01
     precision: 2
@@ -56,6 +60,7 @@
     data_type: int16
     input_type: holding
     scan_interval: 60
+    device_class: temperature
     unit_of_measurement: °C
   - name: MPPT20D Battery Current
     address: 7
@@ -63,6 +68,7 @@
     data_type: uint16
     input_type: holding
     scan_interval: 60
+    device_class: current
     unit_of_measurement: A
     scale: 0.01
     precision: 2
@@ -72,6 +78,7 @@
     data_type: uint16
     input_type: holding
     scan_interval: 60
+    device_class: current
     unit_of_measurement: A
     scale: 0.01
     precision: 2
@@ -82,6 +89,7 @@
     input_type: holding
     scan_interval: 60
     unit_of_measurement: "%"
+    device_class: battery
   - name: MPPT20D Charging Mode RAW
     address: 11
     slave: 1
@@ -96,6 +104,7 @@
     data_type: int16
     input_type: holding
     scan_interval: 60
+    device_class: temperature
     unit_of_measurement: °C
 # per day, month, year stats are skipped
   - name: MPPT20D Total Current Generated
@@ -118,22 +127,24 @@
     scale: 0.01
     precision: 2
 
-  - name: MPPT20D Total Power Generated
+  - name: MPPT20D Total Energy Generated
     address: 24
     slave: 1
     data_type: uint16
     input_type: holding
     scan_interval: 60
+    device_class: energy
     unit_of_measurement: MWh
     scale: 0.01
     precision: 2
 
-  - name: MPPT20D Total Power Spend
+  - name: MPPT20D Total Energy Spend
     address: 28
     slave: 1
     data_type: uint16
     input_type: holding
     scan_interval: 60
+    device_class: energy
     unit_of_measurement: MWh
     scale: 0.01
     precision: 2
@@ -143,7 +154,8 @@
     slave: 1
     data_type: uint16
     input_type: holding
-    scan_interval: 60
+    scan_interval: 3600
+    device_class: voltage
     unit_of_measurement: V
     scale: 0.01
     precision: 2
@@ -152,7 +164,8 @@
     slave: 1
     data_type: uint16
     input_type: holding
-    scan_interval: 60
+    scan_interval: 3600
+    device_class: voltage
     unit_of_measurement: V
     scale: 0.01
     precision: 2
@@ -161,8 +174,28 @@
     slave: 1
     data_type: int16
     input_type: holding
-    scan_interval: 60
+    scan_interval: 3600
     unit_of_measurement: mV/cell/°C
+  - name: MPPT20D LVD Voltage
+    address: 35
+    slave: 1
+    data_type: uint16
+    input_type: holding
+    scan_interval: 3600
+    device_class: voltage
+    unit_of_measurement: V
+    scale: 0.01
+    precision: 2
+  - name: MPPT20D LVR Voltage
+    address: 36
+    slave: 1
+    data_type: uint16
+    input_type: holding
+    scan_interval: 3600
+    device_class: voltage
+    unit_of_measurement: V
+    scale: 0.01
+    precision: 2
 
   - name: MPPT20D Load Mode RAW
     address: 39
@@ -188,13 +221,29 @@
     data_type: uint16
     input_type: holding
     scan_interval: 60
+    
+  - name: Battery Over-Voltage Counter
+    address: 61
+    slave: 1
+    data_type: uint16
+    input_type: holding
+    scan_interval: 3600
+    unit_of_measurement: Times
+  - name: Battery Under-Voltage Counter
+    address: 62
+    slave: 1
+    data_type: uint16
+    input_type: holding
+    scan_interval: 3600
+    unit_of_measurement: Times
 
-  - name: MPPT20D Load Power
+  - name: MPPT20D Load Energy Consumption
     address: 63
     slave: 1
     data_type: uint16
     input_type: holding
     scan_interval: 60
+    device_class: energy
     unit_of_measurement: kWh
     scale: 0.01
     precision: 2
@@ -220,7 +269,9 @@
     slave: 1
     data_type: uint16
     input_type: holding
-    scan_interval: 60
+    scan_interval: 3600
+    device_class: voltage
     unit_of_measurement: V
     scale: 0.01
     precision: 2
+  

@@ -3,32 +3,41 @@
     #unit_of_measurement: "°C"
     icon: mdi:car-battery
     state: >
-      {% set map = ["Custom","Gel","Sealed","Flooded","Lithium"] %}
-      {% set i = states('sensor.mppt20d_battery_type_raw')|int %}
-      {{ map[i]|default(i) }}
+      {% set map = ['unavailable','Custom','Gel','Sealed','Flooded','Lithium'] %}
+      {% set i = states('sensor.mppt20d_battery_type_raw')|int(default=-1) %}
+      {{ map[i+1]|default(i) }}
       
   - name: "MPPT20D Charging Mode"
     #unit_of_measurement: "°C"
     icon: mdi:battery-charging-medium
     state: >
-      {% set map = ["Off","Strong","MPPT","Float","Absorption","Balanced","CC","CV"] %}
-      {% set i = states('sensor.mppt20d_charging_mode_raw')|int %}
-      {{ map[i]|default(i) }}
+      {% set map = ['unavailable','Off','Strong','MPPT','Float','Absorption','Balanced','CC','CV'] %}
+      {% set i = states('sensor.mppt20d_charging_mode_raw')|int(default=-1) %}
+      {{ map[i+1]|default(i) }}
       
   - name: "MPPT20D Load Mode"
     #unit_of_measurement: "°C"
     icon: mdi:lightbulb-outline
     state: >
-      {% set map = ["Standard","Dual time Light control","Light control","Timer"] %}
-      {% set i = states('sensor.mppt20d_load_mode_raw')|int %}
-      {{ map[i]|default(i) }}
+      {% set map = ['unavailable','Standard','Dual time Light control','Light control','Timer'] %}
+      {% set i = states('sensor.mppt20d_load_mode_raw')|int(default=-1) %}
+      {{ map[i+1]|default(i) }}
       
   - name: "MPPT20D Solar Status"
     #unit_of_measurement: "°C"
     icon: mdi:solar-panel
     state: >
-      {% set map = ["Low voltage","Power generation","High voltage","NC"] %}
-      {% set i = states('sensor.mppt20d_solar_status_raw')|int %}
-      {{ map[i]|default(i) }}
+      {% set map = ['unavailable','Low voltage','Power generation','High voltage','NC'] %}
+      {% set i = states('sensor.mppt20d_solar_status_raw')|int(default=-1) %}
+      {{ map[i+1]|default(i) }}
+      
+  - name: "MPPT20D Intergrated Charge Current"
+    unit_of_measurement: Ah
+    device_class: current
+    state: >
+      {% set sum = 
+        states('sensor.mppt20d_battery_current_integrated')|float
+        -  states('sensor.mppt20d_load_current_integrated')|float %}
+      {{ sum }}
      
 #     MPPT20D Controller status bit mask RAW
