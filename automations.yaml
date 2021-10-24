@@ -42,7 +42,7 @@
   description: ''
   trigger:
   - platform: time
-    at: '21:30'
+    at: '21:30:00'
   condition: []
   action:
   - service: light.turn_on
@@ -52,8 +52,9 @@
       brightness: 34
   - service: light.turn_on
     data_template:
-      entity_id: '{{ expand(state_attr(''light.whole_house_lights'', ''entity_id''))|selectattr(''state'',
-        ''eq'', ''on'')|selectattr(''attributes.brightness'', ''gt'', 33)|map(attribute=''entity_id'')|join('',
+      entity_id: '{{ expand(state_attr(''light.whole_house_lights'',''entity_id''))|
+        selectattr(''state'', ''eq'',''on'')| rejectattr(''entity_id'',''eq'',''light.yulia'')|
+        selectattr(''attributes.brightness'', ''gt'', 33)| map(attribute=''entity_id'')|join('',
         '')}}'
       brightness: 33
   mode: single
@@ -62,14 +63,15 @@
   description: ''
   trigger:
   - platform: time
-    at: 00:00
+    at: 00:00:00
   condition: []
   action:
   - service: light.turn_on
     data_template:
-      entity_id: '{{ expand(state_attr(''light.whole_house_lights'', ''entity_id''))|selectattr(''state'',
-        ''eq'', ''on'')|selectattr(''attributes.brightness'', ''gt'', 1)|map(attribute=''entity_id'')|join('',
-        '')}}'
+      entity_id: '{{expand(state_attr(''light.whole_house_lights'',''entity_id''))|
+        selectattr(''state'', ''eq'',''on'')| rejectattr(''entity_id'',''eq'',''light.lamp'')|
+        selectattr(''attributes.brightness'', ''gt'', 1)| map(attribute=''entity_id'')|
+        join('', '')}}'
       brightness: 1
   mode: single
 - id: '1623924293577'
